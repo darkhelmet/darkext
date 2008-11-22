@@ -1,10 +1,9 @@
 %w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
-require File.dirname(__FILE__) + '/lib/darkext'
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('darkext', Darkext::VERSION) do |p|
-  p.developer('FIXME full name', 'FIXME email')
+$hoe = Hoe.new('darkext', '0.0.1') do |p|
+  p.developer('Daniel Huckstep', 'darkhelmet@darkhelmetlive.com')
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.post_install_message = 'PostInstall.txt' # TODO remove if post-install message not required
   p.rubyforge_name       = p.name # TODO this is default value
@@ -14,7 +13,7 @@ $hoe = Hoe.new('darkext', Darkext::VERSION) do |p|
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"]
   ]
-  
+
   p.clean_globs |= %w[**/.DS_Store tmp *.log]
   path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
   p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')

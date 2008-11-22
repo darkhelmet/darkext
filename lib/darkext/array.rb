@@ -1,5 +1,5 @@
-require 'numeric_ext'
-require 'symbol_ext'
+require 'darkext/numeric'
+require 'darkext/symbol'
 
 class Array
   # Rotates the array left by n elements

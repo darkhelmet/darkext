@@ -1,6 +1,6 @@
 require 'mathn'
-require 'numeric_ext'
-require 'array_ext'
+require 'darkext/numeric'
+require 'darkext/array'
 
 class Array
   # Finds the mean of the array
