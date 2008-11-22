@@ -9,3 +9,10 @@ script/destroy
 script/generate
 test/test_darkext.rb
 test/test_helper.rb
+lib/darkext/array_ext.rb
+lib/darkext/boolean_ext.rb
+lib/darkext/hash_ext.rb
+lib/darkext/numeric_ext.rb
+lib/darkext/statistics.rb
+lib/darkext/string_ext.rb
+lib/darkext/symbol_ext.rb
