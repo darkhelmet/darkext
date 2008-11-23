@@ -1,6 +1,3 @@
-(in /home/helmet/dev/darkext)
-# -*- encoding: utf-8 -*-
-
 Gem::Specification.new do |s|
   s.name = %q{darkext}
   s.version = "0.0.1"
