@@ -1,10 +1,10 @@
 = darkext
 
-* FIX (url)
+* http://github.com/darkhelmet/darkext/
 
 == DESCRIPTION:
 
-FIX (describe your package)
+Just some useful Ruby functionality. No particular focus, except usefulness
 
 == FEATURES/PROBLEMS:
 
@@ -20,7 +20,8 @@ FIX (describe your package)
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* $ gem sources -a http://gems.github.com # unless you already have done this
+* $ gem install darkhelmet-darkext
 
 == LICENSE:
 

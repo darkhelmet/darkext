@@ -1,22 +1,22 @@
 Gem::Specification.new do |s|
   s.name = %q{darkext}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Huckstep"]
   s.date = %q{2008-11-23}
-  s.description = %q{FIX (describe your package)}
+  s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
   s.email = ["darkhelmet@darkhelmetlive.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc"]
   s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "lib/darkext.rb", "script/console", "script/destroy", "script/generate", "test/test_darkext.rb", "test/test_helper.rb", "lib/darkext/array.rb", "lib/darkext/boolean.rb", "lib/darkext/hash.rb", "lib/darkext/numeric.rb", "lib/darkext/statistics.rb", "lib/darkext/string.rb", "lib/darkext/symbol.rb"]
   s.has_rdoc = true
-  s.homepage = %q{FIX (url)}
+  s.homepage = %q{http://github.com/darkhelmet/darkext/}
   s.post_install_message = %q{PostInstall.txt}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{darkext}
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{FIX (describe your package)}
+  s.summary = %q{Just some useful Ruby functionality}
   s.test_files = ["test/test_helper.rb", "test/test_darkext.rb"]
 
   if s.respond_to? :specification_version then
