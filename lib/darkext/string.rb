@@ -1,3 +1,5 @@
+require 'darkext/hash'
+
 class String
   # Parses a string like "1..10" to a Range
   def to_range
@@ -13,7 +15,10 @@ class String
   end
 
   # Executes the string with system
-  def exec
-    system(self)
+  def exec(opts = {})
+    opts.with_defaults!(:background => false)
+    cmd = self
+    cmd += " &" if opts[:background]
+    system(cmd)
   end
 end
