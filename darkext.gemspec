@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{darkext}
   s.rubygems_version = %q{1.3.1}
-  s.signing_key = %q{/home/helmet/.gem/gem-private_key.pem}
+  #s.signing_key = %q{/home/helmet/.gem/gem-private_key.pem}
   s.summary = %q{Just some useful Ruby functionality}
   s.test_files = ["test/test_helper.rb", "test/test_darkext.rb"]
 
