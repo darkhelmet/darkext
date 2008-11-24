@@ -29,6 +29,11 @@ class Array
     self.map(&:square)
   end
 
+  # Destructively collects the squares
+  def squares!
+    self.map!(&:square)
+  end
+
   # Finds the sum of squares of the array
   def sum_of_squares
     self.squares.sum
@@ -38,6 +43,7 @@ class Array
   def random
     self[rand(self.size)]
   end
+  alias :pick :random
 
   # Randomizes the array
   def randomize

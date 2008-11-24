@@ -21,4 +21,6 @@ class String
     cmd += " &" if opts[:background]
     system(cmd)
   end
+
+  alias :/ :split
 end
