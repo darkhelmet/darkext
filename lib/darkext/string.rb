@@ -15,11 +15,15 @@ class String
   end
 
   # Executes the string with system
+  # * :background => true to run command in the background using & (currently only works on *nix systems)
+  # * :capture => true to capture the output. If :capture => true, background is voided
   def exec(opts = {})
-    opts.with_defaults!(:background => false)
+    opts.with_defaults!(:background => false, :capture => false)
     cmd = self
-    cmd += " &" if opts[:background]
-    system(cmd)
+    # TODO: Do this with threads maybe, so it's OS agnostic?
+    cmd += " &" if opts[:background] && !opts[:capture]
+    return system(cmd) if !opts[:capture]
+    return `#{cmd}` if opts[:capture]
   end
 
   alias :/ :split

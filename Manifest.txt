@@ -12,6 +12,7 @@ test/test_helper.rb
 lib/darkext/array.rb
 lib/darkext/boolean.rb
 lib/darkext/hash.rb
+lib/darkext/io.rb
 lib/darkext/numeric.rb
 lib/darkext/statistics.rb
 lib/darkext/string.rb
