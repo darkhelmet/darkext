@@ -1,3 +1,9 @@
+== 0.2.0 2008-11-24
+
+* Added Regression module to Statistics
+  * Only method thus far is least_squares
+* Aliased some methods on arrays in Statistics module
+
 == 0.0.1 2008-11-21
 
 * 1 major enhancement:

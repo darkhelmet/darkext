@@ -1,12 +1,16 @@
 require 'mathn'
-require 'darkext/numeric'
+
 require 'darkext/array'
+require 'darkext/numeric'
+require 'darkext/symbol'
 
 class Array
   # Finds the mean of the array
   def mean
     self.sum / self.size.to_f
   end
+  alias :average :mean
+  alias :ave :mean
 
   # Finds the median of the array
   def median
@@ -98,5 +102,40 @@ module Statistics
       Statistics.prob(x)
     end
     return 1 - (probs[1] - probs[0])
+  end
+
+  module Statistics::Regression
+    # Do a least squares linear regression on the two sets of x's and y's
+    # Returns a hash containing many relevant values
+    # * n (:n)
+    # * B_1 (:b_1)
+    # * B_0 (:b_0)
+    # * predicted values (:predicted)
+    # * residuals (:residuals)
+    # * SS_E (:ss_e)
+    # * unbiased estimator (:estimator)
+    # * the equation as a lambda (:equation)
+    # Raises an argument error if the arguments are not the same size
+    def self.least_squares(xs,ys)
+      raise ArgumentError("Arguments must be of equal size") if xs.size != ys.size
+      n = xs.size
+      b_1 = (xs.zip(ys).map(&:*).sum - ((ys.sum * xs.sum)/n))/(xs.map(&:square).sum - (xs.sum.square/n))
+      b_0 = ys.mean - b_1 * xs.mean
+      equation = lambda { |x| b_0 + b_1 * x }
+      predicted = xs.map(&lambda)
+      residuals = ys.zip(predicted).map(&:-)
+      ss_e = residuals.map(&:square).sum
+      estimator = ss_e/(n - 2)
+      reg = Hash.new
+      reg[:n] = n
+      reg[:b_1] = b_1
+      reg[:b_0] = b_0
+      reg[:predicted] = predicted
+      reg[:residuals] = residuals
+      reg[:ss_e] = ss_e
+      reg[:estimator] = estimator
+      reg[:equation] = equation
+      return reg
+    end
   end
 end

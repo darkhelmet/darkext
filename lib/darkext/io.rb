@@ -1,6 +1,6 @@
 require 'darkext/hash'
 
-module IO
+module DarkIO
   # Runs a block and captures the output it generates
   def self.capture_output(opts = { }) # yield e
     opts.with_defaults!(:stdout => true, :stderr => true)
