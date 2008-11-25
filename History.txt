@@ -1,3 +1,8 @@
+== 0.3.1 2008-11-25
+
+* Added destructive randomize! to array
+* Added check to Symbol#to_proc to only define if not respond_to?
+
 == 0.3.0 2008-11-24
 
 * Added factorial method to Integer

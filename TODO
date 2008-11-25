@@ -1,2 +1,3 @@
 * mspec/rspec?
 * remove testing crap if mspec/rspec?
+* Add checks to everything to only define if not respond_to?

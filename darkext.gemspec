@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = %q{darkext}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Huckstep"]
   s.cert_chain = ["/home/helmet/.gem/gem-public_cert.pem"]
-  s.date = %q{2008-11-24}
+  s.date = %q{2008-11-25}
   s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
   s.email = ["darkhelmet@darkhelmetlive.com"]
   s.extra_rdoc_files = ["Manifest.txt", "PostInstall.txt", "README.rdoc"]

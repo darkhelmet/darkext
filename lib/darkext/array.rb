@@ -49,4 +49,9 @@ class Array
   def randomize
     self.sort_by { rand }
   end
+
+  # Destructively randomizes
+  def randomize!
+    self.replace(self.randomize)
+  end
 end
