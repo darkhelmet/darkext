@@ -1,3 +1,8 @@
+== 0.3.0 2008-11-24
+
+* Added factorial method to Integer
+* Added cube method to Numeric
+
 == 0.2.0 2008-11-24
 
 * Added Regression module to Statistics
