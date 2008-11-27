@@ -26,5 +26,10 @@ class String
     return `#{cmd}` if opts[:capture]
   end
 
+  # Prints the String using print
+  def print
+    print self
+  end
+
   alias :/ :split
 end
