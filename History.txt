@@ -1,3 +1,9 @@
+== 0.4.0 2008-12-2
+
+* Fix some statistics stuff
+* Move stats into proper module
+* New sum_of_squares method on array to calculate sum((v - v_bar)^2)
+
 == 0.3.2 2008-11-26
 
 * Add print method on String
