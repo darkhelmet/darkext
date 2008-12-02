@@ -64,78 +64,99 @@ class Array
 
   # Standardizes the array
   def standardize
+    self.clone.standardize!
+  end
+
+  # Destructive standardize
+  def standardize!
     m = self.mean.to_f
     rho = self.deviation.to_f
-    self.map do |v|
+    self.map! do |v|
       (v.to_f - m) / rho
     end
   end
+
+  def sum_of_squares
+    m = self.mean
+    self.map do |v|
+      (v - m).square
+    end.sum
+  end
 end
-
-module Statistics
-  # Finds the probability of a z-score
-  def self.prob(z)
-    p = Math.erf(z.abs/2.sqrt) / 2
-    return 0.5 + p if 0 < z
-    return 0.5 - p
-  end
-
-  # Finds the zscore of a probability
-  def self.zscore(p, epsilon = 0.00000000000001)
-    return -1 if (1 < p || 0 > p)
-    minz, maxz = -6, 6
-    zscore = 0.5
-    prob = 0
-    while (maxz - minz) > epsilon
-      prob = prob(zscore)
-      if prob > p then maxz = zscore else minz = zscore end
-      zscore = (maxz + minz) * 0.5
+module Darkext
+  module Darkext::Statistics
+    # Finds the probability of a z-score
+    def self.prob(z)
+      p = Math.erf(z.abs/2.sqrt) / 2
+      return 0.5 + p if 0 < z
+      return 0.5 - p
     end
-    return zscore
-  end
 
-  # Finds a two tail p-val for a high/low array
-  def self.p_val(r, n = 30, rho = 1, mu = r.mean)
-    probs = r.map do |x|
-      (x - mu) / (rho / n.sqrt)
-    end.map do |x|
-      Statistics.prob(x)
+    # Finds the zscore of a probability
+    def self.zscore(p, epsilon = 0.00000000000001)
+      return -1 if (1 < p || 0 > p)
+      minz, maxz = -6, 6
+      zscore = 0.5
+      prob = 0
+      while (maxz - minz) > epsilon
+        prob = prob(zscore)
+        if prob > p then maxz = zscore else minz = zscore end
+        zscore = (maxz + minz) * 0.5
+      end
+      return zscore
     end
-    return 1 - (probs[1] - probs[0])
-  end
 
-  module Statistics::Regression
-    # Do a least squares linear regression on the two sets of x's and y's
-    # Returns a hash containing many relevant values
-    # * n (:n)
-    # * B_1 (:b_1)
-    # * B_0 (:b_0)
-    # * predicted values (:predicted)
-    # * residuals (:residuals)
-    # * SS_E (:ss_e)
-    # * unbiased estimator (:estimator)
-    # * the equation as a lambda (:equation)
-    # Raises an argument error if the arguments are not the same size
-    def self.least_squares(xs,ys)
-      raise ArgumentError("Arguments must be of equal size") if xs.size != ys.size
-      n = xs.size
-      b_1 = (xs.zip(ys).map(&:*).sum - ((ys.sum * xs.sum)/n))/(xs.map(&:square).sum - (xs.sum.square/n))
-      b_0 = ys.mean - b_1 * xs.mean
-      equation = lambda { |x| b_0 + b_1 * x }
-      predicted = xs.map(&lambda)
-      residuals = ys.zip(predicted).map(&:-)
-      ss_e = residuals.map(&:square).sum
-      estimator = ss_e/(n - 2)
-      reg = Hash.new
-      reg[:n] = n
-      reg[:b_1] = b_1
-      reg[:b_0] = b_0
-      reg[:predicted] = predicted
-      reg[:residuals] = residuals
-      reg[:ss_e] = ss_e
-      reg[:estimator] = estimator
-      reg[:equation] = equation
-      return reg
+    # Finds a two tail p-val for a high/low array
+    def self.p_val(r, n = 30, rho = 1, mu = r.mean)
+      probs = r.map do |x|
+        (x - mu) / (rho / n.sqrt)
+      end.map do |x|
+        Statistics.prob(x)
+      end
+      return 1 - (probs[1] - probs[0])
+    end
+
+    module Darkext::Statistics::Regression
+      # Do a least squares linear regression on the two sets of x's and y's
+      # Returns a hash containing many relevant values
+      # * n (:n)
+      # * B_1 (:b_1)
+      # * B_0 (:b_0)
+      # * predicted values (:predicted)
+      # * residuals (:residuals)
+      # * SSE (:ss_e)
+      # * SST (:ss_t)
+      # * R^2 (:r_2)
+      # * R (:r)
+      # * unbiased estimator (:estimator)
+      # * the equation as a lambda (:equation)
+      # Raises an argument error if the arguments are not the same size
+      def self.least_squares(xs,ys)
+        raise ArgumentError("Arguments must be of equal size") if xs.size != ys.size
+        n = xs.size
+        b_1 = (xs.zip(ys).map(&:product).sum - ((ys.sum * xs.sum)/n))/(xs.map(&:square).sum - (xs.sum.square/n))
+        b_0 = ys.mean - b_1 * xs.mean
+        equation = lambda { |x| b_0 + b_1 * x }
+        predicted = xs.map(&equation)
+        residuals = ys.zip(predicted).map { |y| y.shift - y.shift }
+        ss_e = residuals.map(&:square).sum
+        ss_t = ys.sum_of_squares
+        estimator = ss_e/(n - 2)
+        r_2 = 1 - (ss_e/ss_t)
+        r = r_2.sqrt
+        reg = {:n => n,
+          :b_1 => b_1,
+          :b_0 => b_0,
+          :predicted => predicted,
+          :residuals => residuals,
+          :ss_e => ss_e,
+          :ss_t => ss_t,
+          :estimator => estimator,
+          :equation => equation,
+          :r_2 => r_2,
+          :r => r}
+        return reg
+      end
     end
   end
 end
