@@ -1,5 +1,4 @@
 Manifest.txt
-PostInstall.txt
 README.rdoc
 Rakefile
 lib/darkext.rb
