@@ -63,13 +63,24 @@ class Array
     (1..n).collect { self[rand(self.size)] }
   end
 
-  # Makes a two sided confidence interval for the array
-  # Percent must be 0 < percent < 1 for this to work properly
-  def ci(percent = 0.95, rho = 1)
+  # Generates a confidence interval
+  def ci(opts = { })
+    opts.with_defaults!({ :percent => 0.95, :rho => 1, :type => :center })
     m = self.mean
-    i = ((Darkext::Statistics::zscore((1 - percent) / 2) * rho) /
+    ret = Array.new
+    div = (opts[:type] == :center ? 2 : 1)
+    i = ((Darkext::Statistics::zscore((1 - percent) / div) * rho) /
          self.size.sqrt).abs
-    [m - i, m + i]
+    case opts[:type]
+    when :center
+      ret << m - i
+      ret << m + i
+    when :upper
+      ret << m + i
+    when :lower
+      ret << m - i
+    end
+    return ret
   end
 
   # Standardizes the array
