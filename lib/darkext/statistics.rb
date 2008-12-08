@@ -38,16 +38,25 @@ class Array
     map.keys.select { |x| map[x] == max }
   end
 
-  # Finds the variance of the array
-  def variance(dof = self.size)
-    self.sum_of_squares.to_f / dof.to_f
+  # Population variance
+  def pvariance
+    self.sum_of_squares.to_f / self.size.to_f
   end
 
-  # Finds the standard deviation of the array
-  def deviation(dof = self.size)
-    self.variance(dof).abs.sqrt
+  # Sample variance
+  def svariance
+    self.sum_of_squares.to_f / (self.size - 1).to_f
   end
-  alias :stddev :deviation
+
+  # Population standard deviation
+  def pdeviation
+    self.pvariance.abs.sqrt
+  end
+
+  # Sample standard deviation
+  def sdeviation
+    self.svariance.abs.sqrt
+  end
 
   # Randomly samples n elements
   def sample(n = 1)
