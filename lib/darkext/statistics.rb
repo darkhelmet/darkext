@@ -35,18 +35,19 @@ class Array
   def mode
     map = self.histogram
     max = map.values.max
-    map.keys.select{ |x| map[x] == max}
+    map.keys.select { |x| map[x] == max }
   end
 
   # Finds the variance of the array
-  def variance
-    (self.sum_of_squares.to_f / self.size.to_f) - self.mean.square
+  def variance(dof = self.size)
+    self.sum_of_squares.to_f / dof.to_f
   end
 
   # Finds the standard deviation of the array
-  def deviation
-    self.variance.sqrt
+  def deviation(dof = self.size)
+    self.variance(dof).abs.sqrt
   end
+  alias :stddev :deviation
 
   # Randomly samples n elements
   def sample(n = 1)
@@ -57,7 +58,7 @@ class Array
   # Percent must be 0 < percent < 1 for this to work properly
   def ci(percent = 0.95, rho = 1)
     m = self.mean
-    i = ((Statistics.zscore((1 - percent) / 2) * rho) /
+    i = ((Darkext::Statistics::zscore((1 - percent) / 2) * rho) /
          self.size.sqrt).abs
     [m - i, m + i]
   end
@@ -78,16 +79,14 @@ class Array
 
   def sum_of_squares
     m = self.mean
-    self.map do |v|
-      (v - m).square
-    end.sum
+    self.map { |v| v - m }.map(&:square).sum
   end
 end
 module Darkext
   module Darkext::Statistics
     # Finds the probability of a z-score
     def self.prob(z)
-      p = Math.erf(z.abs/2.sqrt) / 2
+      p = Math::erf(z.abs/2.sqrt) / 2
       return 0.5 + p if 0 < z
       return 0.5 - p
     end
@@ -111,7 +110,7 @@ module Darkext
       probs = r.map do |x|
         (x - mu) / (rho / n.sqrt)
       end.map do |x|
-        Statistics.prob(x)
+        Statistics::prob(x)
       end
       return 1 - (probs[1] - probs[0])
     end
