@@ -38,24 +38,22 @@ class Array
     map.keys.select { |x| map[x] == max }
   end
 
-  # Population variance
-  def pvariance
-    self.sum_of_squares.to_f / self.size.to_f
+  # Variance
+  def population_variance
+    self.sum_of_squares.to_f / (self.size).to_f
   end
 
-  # Sample variance
-  def svariance
+  def sample_variance
     self.sum_of_squares.to_f / (self.size - 1).to_f
   end
 
-  # Population standard deviation
-  def pdeviation
-    self.pvariance.abs.sqrt
+  # Standard deviation
+  def population_deviation
+    self.population_variance.abs.sqrt
   end
 
-  # Sample standard deviation
-  def sdeviation
-    self.svariance.abs.sqrt
+  def sample_deviation
+    self.sample_variance.abs.sqrt
   end
 
   # Randomly samples n elements
@@ -91,17 +89,27 @@ class Array
   # Destructive standardize
   def standardize!
     m = self.mean.to_f
-    rho = self.deviation.to_f
-    self.map! do |v|
-      (v.to_f - m) / rho
-    end
+    rho = self.sample_deviation.to_f
+    self.map! { |v| (v.to_f - m) / rho }
   end
 
   def sum_of_squares
     m = self.mean
     self.map { |v| v - m }.map(&:square).sum
   end
+
+  # Normalize the Array
+  def normalize
+    self.clone.normalize!
+  end
+
+  # Normalize the Array destructive
+  def normalize!
+    m = self.mean.to_f
+    self.map! { |v| v / m }
+  end
 end
+
 module Darkext
   module Darkext::Statistics
     # Finds the probability of a z-score
@@ -119,7 +127,7 @@ module Darkext
       prob = 0
       while (maxz - minz) > epsilon
         prob = prob(zscore)
-        if prob > p then maxz = zscore else minz = zscore end
+        prob > p ? maxz = zscore : minz = zscore
         zscore = (maxz + minz) * 0.5
       end
       return zscore
