@@ -1,4 +1,4 @@
-= darkext[http://github.com/darkhelmet/darkext/]
+= darkext
 
 == DESCRIPTION:
 
