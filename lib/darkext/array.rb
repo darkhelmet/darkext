@@ -34,11 +34,6 @@ class Array
     self.map!(&:square)
   end
 
-  # Finds the sum of squares of the array
-  def sum_of_squares
-    self.squares.sum
-  end
-
   # Picks a random value from the array
   def random
     self[rand(self.size)]

@@ -95,15 +95,15 @@ class Array
 
   def sum_of_squares
     m = self.mean
-    self.map { |v| v - m }.map(&:square).sum
+    self.map { |v| v - m }.squares.sum
   end
 
-  # Normalize the Array
+  # Normalize the array
   def normalize
     self.clone.normalize!
   end
 
-  # Normalize the Array destructive
+  # Normalize the array destructively
   def normalize!
     m = self.mean.to_f
     self.map! { |v| v / m }
