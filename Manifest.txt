@@ -13,6 +13,7 @@ lib/darkext/hash.rb
 lib/darkext/integer.rb
 lib/darkext/io.rb
 lib/darkext/numeric.rb
+lib/darkext/object.rb
 lib/darkext/statistics.rb
 lib/darkext/string.rb
 lib/darkext/symbol.rb
