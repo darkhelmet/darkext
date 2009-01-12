@@ -12,6 +12,16 @@ class Array
   alias :average :mean
   alias :ave :mean
 
+  def harmonic_mean
+    self.size.to_f / self.map { |i| 1 / i.to_f }.sum
+  end
+  alias :h_mean :harmonic_mean
+
+  def geometric_mean
+    self.product.root(self.size)
+  end
+  alias :g_mean :geometric_mean
+
   # Finds the median of the array
   def median
     return nil if self.size.zero?
