@@ -1,3 +1,9 @@
+== 0.5.2 2009-1-11
+
+* Add root method to Numeric
+* Add equals? to Float with tolerance
+* Add harmonic mean and geometric mean
+
 == 0.4.0 2008-12-2
 
 * Fix some statistics stuff
