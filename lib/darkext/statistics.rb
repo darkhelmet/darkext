@@ -66,6 +66,12 @@ class Array
     self.sample_variance.abs.sqrt
   end
 
+  def geometric_deviation
+    gmean = self.g_mean
+    Math.exp((self.map { |x| (x.ln - gmean.ln).square }.sum.to_f / self.size.to_f).sqrt)
+  end
+  alias :gstddev :geometric_deviation
+
   # Randomly samples n elements
   def sample(n = 1)
     (1..n).collect { self[rand(self.size)] }
