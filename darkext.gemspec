@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   s.name = %q{darkext}
-  s.version = "0.5.2"
+  s.version = "0.5.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Huckstep"]
-  s.date = %q{2009-01-12}
+  s.date = %q{2009-01-18}
   s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
   s.email = ["darkhelmet@darkhelmetlive.com"]
   s.extra_rdoc_files = ["Manifest.txt", "README.rdoc"]
-  s.files = ["Manifest.txt", "README.rdoc", "Rakefile", "lib/darkext.rb", "script/console", "script/destroy", "script/generate", "test/test_darkext.rb", "test/test_helper.rb", "lib/darkext/array.rb", "lib/darkext/boolean.rb", "lib/darkext/hash.rb", "lib/darkext/integer.rb", "lib/darkext/io.rb", "lib/darkext/numeric.rb", "lib/darkext/object.rb", "lib/darkext/statistics.rb", "lib/darkext/string.rb", "lib/darkext/symbol.rb"]
+  s.files = ["Manifest.txt", "README.rdoc", "Rakefile", "lib/darkext.rb", "script/console", "script/destroy", "script/generate", "test/test_darkext.rb", "test/test_helper.rb", "lib/darkext/array.rb", "lib/darkext/boolean.rb", "lib/darkext/float.rb", "lib/darkext/hash.rb", "lib/darkext/integer.rb", "lib/darkext/io.rb", "lib/darkext/numeric.rb", "lib/darkext/object.rb", "lib/darkext/statistics.rb", "lib/darkext/string.rb", "lib/darkext/symbol.rb"]
   s.has_rdoc = true
   s.post_install_message = %q{PostInstall.txt}
   s.rdoc_options = ["--main", "README.rdoc"]
