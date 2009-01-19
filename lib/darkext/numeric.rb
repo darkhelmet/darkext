@@ -32,12 +32,3 @@ class Numeric
     Math::log10(self)
   end
 end
-
-class Float
-  EPISILON = 1e-6
-
-  # Equals for floats with tolerance
-  def equals?(x, tolerance = EPISOLON)
-    (self - x).abs < tolerance
-  end
-end
