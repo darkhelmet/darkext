@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
   s.email = ["darkhelmet@darkhelmetlive.com"]
   s.extra_rdoc_files = ["Manifest.txt", "README.rdoc"]
-  s.files = ["Manifest.txt", "README.rdoc", "Rakefile", "lib/darkext.rb", "script/console", "script/destroy", "script/generate", "test/test_darkext.rb", "test/test_helper.rb", "lib/darkext/array.rb", "lib/darkext/boolean.rb", "lib/darkext/float.rb", "lib/darkext/hash.rb", "lib/darkext/integer.rb", "lib/darkext/io.rb", "lib/darkext/numeric.rb", "lib/darkext/object.rb", "lib/darkext/sitemap.rb", "lib/darkext/statistics.rb", "lib/darkext/string.rb", "lib/darkext/symbol.rb"]
+  s.files = ["Manifest.txt", "README.rdoc", "Rakefile", "lib/darkext.rb", "script/console", "script/destroy", "script/generate", "test/test_darkext.rb", "test/test_helper.rb", "lib/darkext/array.rb", "lib/darkext/boolean.rb", "lib/darkext/float.rb", "lib/darkext/hash.rb", "lib/darkext/integer.rb", "lib/darkext/io.rb", "lib/darkext/numeric.rb", "lib/darkext/object.rb", "lib/darkext/sitemap_generator.rb", "lib/darkext/statistics.rb", "lib/darkext/string.rb", "lib/darkext/symbol.rb"]
   s.has_rdoc = true
   s.post_install_message = %q{PostInstall.txt}
   s.rdoc_options = ["--main", "README.rdoc"]
