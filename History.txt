@@ -1,3 +1,7 @@
+== 0.6.0 2009-2-11
+
+* Added additions to Net module to download and download and save files
+
 == 0.5.6 2009-2-11
 
 * Fixed bug in string
