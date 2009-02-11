@@ -1,4 +1,8 @@
-== 0.5.5 2009-10-25
+== 0.5.6 2009-2-11
+
+* Fixed bug in string
+
+== 0.5.5 2009-2-11
 
 * Fixed a string thing so you can do ranges with letters too
 * Fixed a capture IO thing

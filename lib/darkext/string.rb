@@ -36,7 +36,7 @@ class String
 
   # Prints the String using print
   def print
-    print self
+    Kernel.print(self)
   end
 
   alias :/ :split
