@@ -6,10 +6,18 @@ class String
     case self.count('.')
     when 2
       elements = self.split('..')
-      return Range.new(elements[0].to_i, elements[1].to_i)
+      if elements[0] == elements[0].to_i.to_s
+        return Range.new(elements[0].to_i, elements[1].to_i)
+      else
+        return Range.new(elements[0], elements[1])
+      end
     when 3
       elements = self.split('...')
-      return Range.new(elements[0].to_i, elements[1].to_i-1)
+      if elements[0] == elements[0].to_i.to_s
+        return Range.new(elements[0].to_i, (elements[1] - 1).to_i)
+      else
+        return Range.new(elements[0], elements[1] - 1)
+      end
     end
     return nil
   end

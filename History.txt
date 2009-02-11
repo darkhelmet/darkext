@@ -1,3 +1,8 @@
+== 0.5.5 2009-10-25
+
+* Fixed a string thing so you can do ranges with letters too
+* Fixed a capture IO thing
+
 == 0.5.4 2009-1-25
 
 * Added some new fun things to hash (nested_find, among others)
