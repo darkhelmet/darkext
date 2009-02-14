@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 Gem::Specification.new do |s|
   s.name = %q{darkext}
   s.version = "0.7.2"
@@ -6,31 +8,22 @@ Gem::Specification.new do |s|
   s.authors = ["Daniel Huckstep"]
   s.date = %q{2009-02-14}
   s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
-  s.email = ["darkhelmet@darkhelmetlive.com"]
-  s.extra_rdoc_files = ["Manifest.txt", "README.rdoc"]
-  s.files = ["Manifest.txt", "README.rdoc", "Rakefile", "lib/darkext.rb", "script/console", "script/destroy", "script/generate", "test/test_darkext.rb", "test/test_helper.rb", "lib/darkext/array.rb", "lib/darkext/beagle.rb", "lib/darkext/boolean.rb", "lib/darkext/float.rb", "lib/darkext/hash.rb", "lib/darkext/integer.rb", "lib/darkext/io.rb", "lib/darkext/net.rb", "lib/darkext/numeric.rb", "lib/darkext/object.rb", "lib/darkext/sitemap_generator.rb", "lib/darkext/statistics.rb", "lib/darkext/string.rb", "lib/darkext/symbol.rb"]
+  s.email = %q{darkhelmet@darkhelmetlive.com}
+  s.files = ["VERSION.yml", "README.rdoc", "History.txt", "lib/darkext", "lib/darkext/numeric.rb", "lib/darkext/string.rb", "lib/darkext/io.rb", "lib/darkext/symbol.rb", "lib/darkext/statistics.rb", "lib/darkext/boolean.rb", "lib/darkext/hash.rb", "lib/darkext/net.rb", "lib/darkext/object.rb", "lib/darkext/array.rb", "lib/darkext/sitemap_generator.rb", "lib/darkext/beagle.rb", "lib/darkext/float.rb", "lib/darkext/integer.rb", "lib/darkext.rb", "test/test_helper.rb", "test/test_darkext.rb"]
   s.has_rdoc = true
-  s.post_install_message = %q{PostInstall.txt}
-  s.rdoc_options = ["--main", "README.rdoc"]
+  s.homepage = %q{http://github.com/darkhelmet/darkext}
+  s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{darkext}
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Just some useful Ruby functionality}
-  s.test_files = ["test/test_helper.rb", "test/test_darkext.rb"]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 2
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<newgem>, [">= 1.2.3"])
-      s.add_development_dependency(%q<hoe>, [">= 1.8.0"])
     else
-      s.add_dependency(%q<newgem>, [">= 1.2.3"])
-      s.add_dependency(%q<hoe>, [">= 1.8.0"])
     end
   else
-    s.add_dependency(%q<newgem>, [">= 1.2.3"])
-    s.add_dependency(%q<hoe>, [">= 1.8.0"])
   end
 end
