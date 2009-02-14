@@ -8,6 +8,7 @@ script/generate
 test/test_darkext.rb
 test/test_helper.rb
 lib/darkext/array.rb
+lib/darkext/beagle.rb
 lib/darkext/boolean.rb
 lib/darkext/float.rb
 lib/darkext/hash.rb

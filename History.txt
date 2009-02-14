@@ -1,3 +1,7 @@
+== 0.7.0 2009-2-14
+
+* Added Beagle module for working with the beagle index and search daemon
+
 == 0.6.0 2009-2-11
 
 * Added additions to Net module to download and download and save files
