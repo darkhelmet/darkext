@@ -1,3 +1,7 @@
+== 0.7.1 2009-2-14
+
+* Added printn to String
+
 == 0.7.0 2009-2-14
 
 * Added Beagle module for working with the beagle index and search daemon

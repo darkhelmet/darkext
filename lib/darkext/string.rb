@@ -39,5 +39,9 @@ class String
     Kernel.print(self)
   end
 
+  def printn
+    Kernel.print(self + "\n")
+  end
+
   alias :/ :split
 end
