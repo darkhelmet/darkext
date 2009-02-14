@@ -37,6 +37,17 @@ module Beagle
     parser.call(output)
   end
 
+  def self.running?
+    raise BeagleError, "Beagle.home (BEAGLE_HOME) not set!" if home.nil?
+    return false if status.include?("Could not connect")
+    return true
+  end
+
+  def self.status
+    raise BeagleError, "Beagle.home (BEAGLE_HOME) not set!" if home.nil?
+    DarkIO.capture_output(:stderr => false) { system('beagle-info','--status') }.strip
+  end
+
 private
 
   def self.verbose_parser
