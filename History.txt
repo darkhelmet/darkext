@@ -1,3 +1,8 @@
+== 0.8.0 2009-2-20
+
+* Fixed Beagle stuff indexing everything instead of just files
+* Added sinatra helpers
+
 == 0.7.2 2009-2-14
 
 * Added running? and status to Beagle module
