@@ -1,5 +1,6 @@
 require 'darkext/io'
 require 'darkext/symbol'
+require 'extensions/string'
 
 module Beagle
   class BeagleError < RuntimeError
@@ -18,7 +19,7 @@ module Beagle
 
   def self.start
     raise BeagleError, "Beagle.home (BEAGLE_HOME) not set!" if home.nil?
-    system('beagled')
+    system('beagled --backend Files')
   end
 
   def self.stop
@@ -62,12 +63,12 @@ private
         section_lines = section.split("\n")
         section_hash = Hash.new
         section_lines.each do |line|
-          if line.include?('=')
+          if !line.include?('=') || line.starts_with?(' Snip')
+            k,v = line.split(':')
+          else
             k,v = line.split('=')
             k = k.split(':').last
             v.gsub!("'",'')
-          else
-            k,v = line.split(':')
           end
           section_hash[k.strip] = v.strip
         end
