@@ -21,9 +21,10 @@ module Darkext
       end
 
       def js_tag(script)
+        @dsh_script = script
         temp = ["%script{ :type => 'text/javascript' }",
                 "  //<![CDATA[",
-                "  = #{script}",
+                "  = @dsh_script",
                 "  //]]>"].join("\n")
         partial(temp)
       end
