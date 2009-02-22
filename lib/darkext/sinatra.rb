@@ -13,21 +13,17 @@ module Darkext
       end
 
       def css_link_tag(sheet, media = 'screen,projection')
-        @dsh_sheet = sheet
-        @dsh_media = media
-        partial('%link{ :type => "text/css", :href => "/stylesheets/#{@dsh_sheet}.css", :rel => "stylesheet", :media => "#{@dsh_media}" }')
+        partial("%link{ :type => 'text/css', :href => '/stylesheets/#{sheet}.css', :rel => 'stylesheet', :media => '#{media}' }")
       end
 
       def js_script_tag(script)
-        @dsh_script = script
-        partial('%script{ :type => "text/javascript", :src => "/javascripts/#{@dsh_script}.js" }')
+        partial("%script{ :type => 'text/javascript', :src => '/javascripts/#{script}.js' }")
       end
 
       def js_tag(script)
-        @dsh_script = script
         temp = ["%script{ :type => 'text/javascript' }",
                 "  //<![CDATA[",
-                "  = @dsh_script",
+                "  = #{script}",
                 "  //]]>"].join("\n")
         partial(temp)
       end
