@@ -1,3 +1,7 @@
+== 0.8.1 2009-2-21
+
+* Get rid of stupid variables in sinatra helpers
+
 == 0.8.0 2009-2-20
 
 * Fixed Beagle stuff indexing everything instead of just files
