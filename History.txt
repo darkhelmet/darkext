@@ -1,3 +1,8 @@
+== 0.8.3 2009-2-23
+
+* Fix up sinatra stuff to be extensions
+* Don't include sinatra stuff by default. you must require explicitly.
+
 == 0.8.2 2009-2-21
 
 * Okay the one needed to be there...

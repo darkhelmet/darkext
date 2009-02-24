@@ -1,6 +1,8 @@
-module Darkext
-  module Sinatra
-    module Helpers
+require 'sinatra/base'
+
+module Sinatra
+  module DarkHelpers
+    module HelperMethods
       def view(view, options = {})
         html = haml(view,options)
         flash.clear
@@ -13,11 +15,11 @@ module Darkext
       end
 
       def css_link_tag(sheet, media = 'screen,projection')
-        partial("%link{ :type => 'text/css', :href => '/stylesheets/#{sheet}.css', :rel => 'stylesheet', :media => '#{media}' }")
+        partial("%link{ :type => 'text/css', :href => 'stylesheets/#{sheet}.css', :rel => 'stylesheet', :media => '#{media}' }")
       end
 
       def js_script_tag(script)
-        partial("%script{ :type => 'text/javascript', :src => '/javascripts/#{script}.js' }")
+        partial("%script{ :type => 'text/javascript', :src => 'javascripts/#{script}.js' }")
       end
 
       def js_tag(script)
@@ -35,7 +37,7 @@ module Darkext
       end
 
       def host
-        port = request.env['SERVER_PORT']
+        port = request.env['SERVER_PORT'].to_i
         port = port == 80 ? "" : ":#{port}"
         "#{protocol}://#{server_name}#{port}"
       end
@@ -56,5 +58,11 @@ module Darkext
         "#{host}#{options.site_base}"
       end
     end
+
+    def self.registered(app)
+      app.helpers HelperMethods
+    end
   end
+
+  register DarkHelpers
 end
