@@ -15,11 +15,11 @@ module Sinatra
       end
 
       def css_link_tag(sheet, media = 'screen,projection')
-        partial("%link{ :type => 'text/css', :href => 'stylesheets/#{sheet}.css', :rel => 'stylesheet', :media => '#{media}' }")
+        partial("%link{ :type => 'text/css', :href => '#{options.slash ? '/' : ''}stylesheets/#{sheet}.css', :rel => 'stylesheet', :media => '#{media}' }")
       end
 
       def js_script_tag(script)
-        partial("%script{ :type => 'text/javascript', :src => 'javascripts/#{script}.js' }")
+        partial("%script{ :type => 'text/javascript', :src => '#{options.slash ? '/' : ''}javascripts/#{script}.js' }")
       end
 
       def js_tag(script)
@@ -61,6 +61,7 @@ module Sinatra
 
     def self.registered(app)
       app.helpers HelperMethods
+      app.disable(:slash)
     end
   end
 
