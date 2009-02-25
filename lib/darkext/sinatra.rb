@@ -62,6 +62,7 @@ module Sinatra
     def self.registered(app)
       app.helpers HelperMethods
       app.disable(:slash)
+      app.enable(:sessions)
     end
   end
 

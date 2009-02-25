@@ -1,3 +1,7 @@
+== 0.8.5 2009-2-25
+
+* enable(:sessions) for sinatra stuff since flash needs it
+
 == 0.8.4 2009-2-24
 
 * Add slash prefix option
