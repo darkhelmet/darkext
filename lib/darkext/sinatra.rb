@@ -22,8 +22,6 @@ module Sinatra
         end
       end
 
-      end
-
       def css_link_tag(sheet, media = 'screen,projection')
         partial("%link{ :type => 'text/css', :href => '#{options.slash ? '/' : ''}stylesheets/#{sheet}.css', :rel => 'stylesheet', :media => '#{media}' }")
       end

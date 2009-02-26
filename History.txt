@@ -1,3 +1,7 @@
+== 0.8.7 2009-2-25
+
+* Stupid $end
+
 == 0.8.6 2009-2-25
 
 * better partials
