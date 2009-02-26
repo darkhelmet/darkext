@@ -1,5 +1,3 @@
-require 'sinatra/base'
-
 module Sinatra
   module DarkHelpers
     module HelperMethods
@@ -10,7 +8,6 @@ module Sinatra
       end
 
       def partial(template, options = {})
-        options = args.extract_options!
         options.merge!(:layout => false)
         if collection = options.delete(:collection) then
           collection.inject([]) do |buffer, member|
@@ -63,7 +60,7 @@ module Sinatra
       end
 
       def base
-        "#{host}#{options.site_base}"
+        host + options.site_base
       end
     end
 
