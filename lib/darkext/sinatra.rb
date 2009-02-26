@@ -9,9 +9,19 @@ module Sinatra
         html
       end
 
-      def partial(page, options = {})
-        # Can't make this use view() because of the flash.clear
-        haml(page, options.merge!(:layout => false))
+      def partial(template, options = {})
+        options = args.extract_options!
+        options.merge!(:layout => false)
+        if collection = options.delete(:collection) then
+          collection.inject([]) do |buffer, member|
+            buffer << haml(template, options.merge(:layout => false,
+                                                   :locals => {template.to_sym => member}))
+          end.join("\n")
+        else
+          haml(template, options)
+        end
+      end
+
       end
 
       def css_link_tag(sheet, media = 'screen,projection')
