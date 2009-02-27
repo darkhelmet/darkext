@@ -54,6 +54,10 @@ module Sinatra
       def base
         host + options.site_base
       end
+
+      def redirect_back
+        redirect(request.env['HTTP_REFERER'])
+      end
     end
 
     def self.registered(app)

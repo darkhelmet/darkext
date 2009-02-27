@@ -43,5 +43,13 @@ class String
     Kernel.print(self + "\n")
   end
 
+  def true?
+    self.downcase == 'true'
+  end
+
+  def false?
+    self.downcase == 'false'
+  end
+
   alias :/ :split
 end

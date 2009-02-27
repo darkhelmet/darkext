@@ -1,3 +1,7 @@
+== 0.9.2 2009-2-27
+
+* Few fixes
+
 == 0.9.1 2009-2-26
 
 * go back to regular partial

@@ -64,7 +64,9 @@ private
         section_hash = Hash.new
         section_lines.each do |line|
           if !line.include?('=') || line.starts_with?(' Snip')
-            k,v = line.split(':')
+            parts = line.split(':')
+            k = parts.shift
+            v = parts.join(':')
           else
             k,v = line.split('=')
             k = k.split(':').last
