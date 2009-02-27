@@ -1,3 +1,7 @@
+== 0.9.1 2009-2-26
+
+* go back to regular partial
+
 == 0.9.0 2009-2-26
 
 * fix and let's release a new minor

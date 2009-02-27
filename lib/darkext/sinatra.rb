@@ -8,15 +8,7 @@ module Sinatra
       end
 
       def partial(template, options = {})
-        options.merge!(:layout => false)
-        if collection = options.delete(:collection) then
-          collection.inject([]) do |buffer, member|
-            buffer << haml(template, options.merge(:layout => false,
-                                                   :locals => {template.to_sym => member}))
-          end.join("\n")
-        else
-          haml(template, options)
-        end
+        haml(view,options.merge(:layout => false))
       end
 
       def css_link_tag(sheet, media = 'screen,projection')
