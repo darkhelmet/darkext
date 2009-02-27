@@ -27,11 +27,13 @@ module Beagle
     system('beagle-shutdown')
   end
 
-  def self.query(query, verbose = false)
+  def self.query(query, verbose = false, max_hits = 40)
     raise BeagleError, "Beagle.home (BEAGLE_HOME) not set!" if home.nil?
     args = Array.new
     args << 'beagle-query'
     args << '--verbose' if verbose
+    args << '--max-hits'
+    args << max_hits.to_s
     args << query
     output = DarkIO.capture_output(:stderr => false) { system(*args) }
     parser = verbose ? verbose_parser : regular_parser
@@ -53,12 +55,7 @@ private
 
   def self.verbose_parser
     lambda do |output|
-      lines = output.split("\n")
-      2.times do
-        lines.shift
-        lines.pop
-      end
-      sections = lines.join("\n").strip.split("\n\n")
+      sections = output.strip.split("\n\n")
       results = sections.map do |section|
         section_lines = section.split("\n")
         section_hash = Hash.new
@@ -67,16 +64,17 @@ private
             parts = line.split(':')
             k = parts.shift
             v = parts.join(':')
-          else
+            section_hash[k.strip] = v.strip
+          elsif line.include?('=')
             k,v = line.split('=')
             k = k.split(':').last
             v.gsub!("'",'')
+            section_hash[k.strip] = v.strip
           end
-          section_hash[k.strip] = v.strip
         end
         section_hash
       end
-      results.sort { |l,r| l['Score'] <=> r['Score'] }
+      results.sort { |l,r| l['Score'].to_f <=> r['Score'].to_f }
     end
   end
 
