@@ -7,7 +7,7 @@ module Sinatra
         html
       end
 
-      def partial(template, options = {})
+      def partial(view, options = {})
         haml(view,options.merge(:layout => false))
       end
 
