@@ -11,6 +11,7 @@ module Net
     else
       path = File.expand_path(path)
     end
-    open(path,'w') { |file| file.write(download(url)) }
+    resp = download(url)
+    open(path,'w') { |file| file.write(resp) } if resp.to_s.include?('HTTPOK')
   end
 end
