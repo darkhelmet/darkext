@@ -75,9 +75,7 @@ module Beagle
     args << '--max-hits'
     args << max_hits.to_s
     args << query
-    cmd = args.join(' ')
-    cmd.printn
-    return BeagleResultsHelper.new(IO.popen(cmd))
+    return BeagleResultsHelper.new(IO.popen(args.join(' ')))
   end
 
   def self.running?
