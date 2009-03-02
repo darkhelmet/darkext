@@ -51,5 +51,15 @@ class String
     self.downcase == 'false'
   end
 
+  def starts_with?(str)
+    str = str.to_s
+    str == self[0, str.length]
+  end
+
+  def ends_with?(str)
+    str = str.to_s
+    str == self[-str.length, str.length]
+  end
+
   alias :/ :split
 end
