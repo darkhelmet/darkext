@@ -1,3 +1,10 @@
+== 0.9.5 2009-3-2
+
+* add fibers
+* add string#ends_with? and string#starts_with?
+* make beagle not suck as much, but still suck a bit
+* don't load sitemap_generator on include
+
 == 0.9.4 2009-2-27
 
 * Speed up beagle a bit...
