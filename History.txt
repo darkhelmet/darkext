@@ -1,3 +1,7 @@
+== 0.9.7 2009-3-2
+
+* Close when done fiber
+
 == 0.9.6 2009-3-2
 
 * Remove printn

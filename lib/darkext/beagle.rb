@@ -33,6 +33,7 @@ module Beagle
           end
           Fiber.yield(result)
         end
+        @io.close
       end
     end
 
@@ -42,10 +43,6 @@ module Beagle
       rescue FiberError
         return nil
       end
-    end
-
-    def close
-      @io.close
     end
   end
 
