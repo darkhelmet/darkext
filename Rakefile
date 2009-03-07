@@ -26,7 +26,7 @@ end
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
-  t.test_files = FileList['test/**/test_*.rb']
+  t.test_files = FileList['test/**/*_test.rb']
   t.verbose = false
 end
 
@@ -34,11 +34,21 @@ begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |t|
     t.libs << 'test'
-    t.test_files = FileList['test/**/test_*.rb']
+    t.test_files = FileList['test/**/*_test.rb']
     t.verbose = true
   end
 rescue LoadError
   puts "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+end
+
+begin
+  require "spec/rake/spectask"
+  Spec::Rake::SpecTask.new do |t|
+    t.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
+    t.spec_files = FileList['spec/**/*_spec.rb']
+  end
+rescue LoadError
+  puts "rspec is not available. In order to run rspec, you must: sudo gem install rspec"
 end
 
 begin
