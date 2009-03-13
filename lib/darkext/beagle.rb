@@ -15,8 +15,10 @@ module Beagle
         while !@io.eof?
           result = Hash.new
           loop do
-            line = @io.gets.chomp
-            break if line.nil? || (line.empty? && 0 < result.keys.size)
+            line = @io.gets
+            break if line.nil?
+            line.chomp!
+            break if line.empty? && 0 < result.keys.size
             if !line.include?('=') || line.starts_with?(' Snip')
               parts = line.split(':')
               k = parts.shift.strip
@@ -69,7 +71,7 @@ module Beagle
     args << '--verbose'
     args << '--max-hits'
     args << max_hits.to_s
-    args << query
+    args << query.gsub('"','\"')
     return BeagleResultsHelper.new(IO.popen(args.join(' ')))
   end
 
