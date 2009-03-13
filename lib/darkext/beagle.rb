@@ -15,18 +15,16 @@ module Beagle
         while !@io.eof?
           result = Hash.new
           loop do
-            line = @io.gets
-            break if line.nil?
+            line = @io.gets.chomp
+            break if line.nil? || (line.empty? && 0 < result.keys.size)
             if !line.include?('=') || line.starts_with?(' Snip')
               parts = line.split(':')
               k = parts.shift.strip
-              break if result.keys.include?(k)
               v = parts.join(':').strip
               result[k] = v unless k.empty? || v.empty?
             elsif line.include?('=')
               k,v = line.split('=')
               k = k.split(':').last.strip
-              break if result.keys.include?(k)
               v = v.gsub("'",'').strip
               result[k] = v unless k.empty? || v.empty?
             end
