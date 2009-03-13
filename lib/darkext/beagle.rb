@@ -71,7 +71,7 @@ module Beagle
     args << '--verbose'
     args << '--max-hits'
     args << max_hits.to_s
-    args << query.gsub('"','\"')
+    args << "\"#{query.gsub('"','\"')}\""
     return BeagleResultsHelper.new(IO.popen(args.join(' ')))
   end
 
