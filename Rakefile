@@ -9,6 +9,7 @@ begin
     s.homepage = "http://github.com/darkhelmet/darkext"
     s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
     s.authors = ["Daniel Huckstep"]
+    s.files = FileList["[A-Z]*.*", "{bin,app_generators,lib,test,spec}/**/*"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"

@@ -1,8 +1,19 @@
 require 'net/http'
 
 module Net
-  def self.download(url)
-    Net::HTTP.get_response(URI.parse(url))
+  def self.download(url,limit = 10)
+    raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+    #url = URI.parse(url)
+    #req = Net::HTTP::Get.new(url.path)
+    #req['User-Agent'] = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.7) Gecko/2009030422 Ubuntu/8.10 (intrepid) Firefox/3.0.7"
+    #resp = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
+    resp = Net::HTTP.get_response(URI.parse(url))
+    case resp
+    when Net::HTTPSuccess     then resp
+    when Net::HTTPRedirection then download(resp['location'], limit - 1)
+    else
+      resp.error!
+    end
   end
 
   def self.download_and_save(url,path = nil)
@@ -12,6 +23,6 @@ module Net
       path = File.expand_path(path)
     end
     resp = download(url)
-    open(path,'w') { |file| file.write(resp) } if resp.to_s.include?('HTTPOK')
+    open(path,'w') { |file| file.write(resp.body) } if resp.is_a?(Net::HTTPSuccess)
   end
 end

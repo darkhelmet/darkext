@@ -6,11 +6,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Huckstep"]
-  s.date = %q{2009-03-13}
+  s.date = %q{2009-03-17}
+  s.default_executable = %q{sinatra-app}
   s.description = %q{Just some useful Ruby functionality. No particular focus, except usefulness}
   s.email = %q{darkhelmet@darkhelmetlive.com}
+  s.executables = ["sinatra-app"]
   s.extra_rdoc_files = ["README.rdoc"]
-  s.files = ["VERSION.yml", "README.rdoc", "History.txt", "lib/darkext", "lib/darkext/numeric.rb", "lib/darkext/string.rb", "lib/darkext/io.rb", "lib/darkext/fiber.rb", "lib/darkext/symbol.rb", "lib/darkext/statistics.rb", "lib/darkext/sinatra.rb", "lib/darkext/boolean.rb", "lib/darkext/hash.rb", "lib/darkext/net.rb", "lib/darkext/object.rb", "lib/darkext/array.rb", "lib/darkext/sitemap_generator.rb", "lib/darkext/beagle.rb", "lib/darkext/float.rb", "lib/darkext/integer.rb", "lib/darkext.rb", "test/helper.rb", "test/darkext_test.rb", "spec/spec.opts"]
+  s.files = ["VERSION.yml", "README.rdoc", "History.txt", "bin/sinatra-app", "app_generators/sinatra_app_generator.rb", "app_generators/templates", "app_generators/templates/http_method.rb", "app_generators/templates/app.rb", "app_generators/templates/helpers.rb", "lib/darkext", "lib/darkext/numeric.rb", "lib/darkext/string.rb", "lib/darkext/io.rb", "lib/darkext/fiber.rb", "lib/darkext/symbol.rb", "lib/darkext/statistics.rb", "lib/darkext/sinatra.rb", "lib/darkext/boolean.rb", "lib/darkext/hash.rb", "lib/darkext/net.rb", "lib/darkext/object.rb", "lib/darkext/array.rb", "lib/darkext/sitemap_generator.rb", "lib/darkext/beagle.rb", "lib/darkext/float.rb", "lib/darkext/integer.rb", "lib/darkext.rb", "test/helper.rb", "test/darkext_test.rb", "spec/spec.opts"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/darkhelmet/darkext}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
