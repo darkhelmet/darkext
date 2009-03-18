@@ -1,5 +1,5 @@
 module Sinatra
-  module <%= app_name.capitalize %>Helpers
+  module <%= app_name_fixed %>Helpers
     module HelperMethods
     end
 
@@ -8,5 +8,5 @@ module Sinatra
     end
   end
 
-  register <%= app_name.capitalize %>Helpers
+  register <%= app_name_fixed %>Helpers
 end

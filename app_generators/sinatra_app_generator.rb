@@ -6,13 +6,14 @@ class SinatraAppGenerator < RubiGen::Base
 
   default_options(:shebang => DEFAULT_SHEBANG)
 
-  attr_accessor :app_name, :module_name
+  attr_accessor :app_name, :module_name, :app_name_fixed
 
   def initialize(runtime_args, runtime_options = {})
     super
     usage if args.empty?
     @destination_root = args.shift
     self.app_name = File.basename(File.expand_path(@destination_root))
+    self.app_name_fixed = self.app_name.split('-').map(&:capitalize).join
     self.module_name = app_name.camelize
   end
 
@@ -26,11 +27,12 @@ class SinatraAppGenerator < RubiGen::Base
       m.directory('')
       %w(lib public views).each { |path| m.directory(path) }
       %w(get put post delete).each do |path|
-        m.directory("lib/#{path}")
         m.template('http_method.rb', "lib/#{path}.rb", :assigns => { :method => path })
       end
-      m.template('helpers.rb', "lib/helpers.rb")
-      m.template('app.rb', "#{app_name}.rb")
+      m.template('helpers.rb', 'lib/helpers.rb')
+      m.template('options.rb', 'lib/options.rb')
+      m.template('error.rb', 'lib/error.rb')
+      m.template('app.rb', "#{app_name}.rb", script_options)
       #m.dependency "install_rubigen_scripts", [destination_root, "rubygems"], :shebang => options[:shebang]
     end
   end

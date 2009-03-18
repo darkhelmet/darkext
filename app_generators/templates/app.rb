@@ -1,12 +1,16 @@
-# $:.unshift(File.dirname(__FILE__) + '/lib')
+#!/usr/bin/env ruby
 
-%w(sinatra/base darkext darkext/sinatra).each { |lib| require lib }
-FileList['lib/*.rb'].each { |file| load file }
+%w(rubygems sinatra/base darkext darkext/sinatra).each { |lib| require lib }
+Dir['lib/*.rb'].each { |file| load file }
 
-class <%= app_name.capitalize %>Site
+load 'local_options.rb' if File.exists?('local_options.rb')
+
+class <%= app_name_fixed %>Site < Sinatra::Default
+  set(:app_file, File.expand_path(__FILE__))
   register Sinatra::DarkHelpers
-  <% for lib in %w(Options Helpers Extras Error Get Post Put Delete) %>
-  register Sinatra::<%= app_name.capitalize %><%= lib %><% end %>
+  <% for lib in %w(Options Helpers Error Get Post Put Delete) %>
+  register Sinatra::<%= app_name_fixed %><%= lib %><% end %>
+  register Sinatra::LocalOptions unless defined?(Sinatra::LocalOptions).nil?
 end
 
-<%= app_name.capitalize %>Site.run!(:app_file => __FILE__) if __FILE__ == $0
+<%= app_name_fixed %>Site.run! if __FILE__ == $0
