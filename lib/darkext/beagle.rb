@@ -77,7 +77,8 @@ module Beagle
 
   def self.running?
     raise BeagleError, "Beagle.home (BEAGLE_HOME) not set!" if home.nil?
-    return false if status.include?("Could not connect")
+    s = status
+    return false if s.include?("Could not connect") || s.empty?
     return true
   end
 

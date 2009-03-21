@@ -6,4 +6,45 @@ describe Beagle do
       Beagle.respond_to?(method).should == true
     end
   end
+
+  it 'should not work if Beagle.home is nil' do
+    Beagle.home = nil
+    begin
+      Beagle.start
+      # fail if we get here
+      false.should == true
+    rescue
+      $!.is_a?(Beagle::BeagleError).should == true
+    end
+  end
+
+  it 'should return a true or false value from running' do
+    # TODO: use temp dir
+    Beagle.home = '/balls'
+    Beagle.running?.is_boolean?.should == true
+  end
+
+  it 'should probably not be running for a random directory' do
+    # TODO: use temp dir
+    Beagle.home = '/balls'
+    Beagle.running?.should == false
+  end
+
+  it 'should return a String for the status' do
+    # TODO: use temp dir
+    Beagle.home = '/balls'
+    Beagle.status.is_a?(String).should == true
+  end
+
+  it 'should return a true or false value from start' do
+    # TODO: use temp dir
+    Beagle.home = '/usr'
+    Beagle.start.is_boolean?.should == true
+  end
+
+  it 'should return a true or false value from stop' do
+    # TODO: use temp dir
+    Beagle.home = '/usr'
+    Beagle.stop.is_boolean?.should == true
+  end
 end
