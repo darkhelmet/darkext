@@ -25,11 +25,8 @@ describe Array do
     b.should == @a
   end
 
-  it 'should return a Numeric from sum' do
+  it 'should return a Numeric from sum and sum' do
     @a.sum.is_a?(Numeric).should == true
-  end
-
-  it 'should return a Numeric from product' do
     @a.product.is_a?(Numeric).should == true
   end
 
