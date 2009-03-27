@@ -21,7 +21,7 @@ describe Fiber do
       # should break before this
       true.should == false
     rescue
-      $!.is_a?(FiberError).should == true
+      $!.should be_a_kind_of(FiberError)
     end
   end
 end

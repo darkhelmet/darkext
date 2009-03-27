@@ -10,6 +10,6 @@ describe Hash do
   end
 
   it 'should return a hash from with_defaults' do
-    @hash.with_defaults(:foo => :bar).is_a?(Hash).should == true
+    @hash.with_defaults(:foo => :bar).should be_a_kind_of(Hash)
   end
 end

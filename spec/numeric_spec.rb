@@ -12,7 +12,7 @@ describe Numeric do
   it 'should return Numeric from most new methods' do
     %w(square cube sqrt root ln log).each do |method|
       [10,10.5].each do |num|
-        num.send(method.intern).is_a?(Numeric).should == true
+        num.send(method.intern).should be_a_kind_of(Numeric)
       end
     end
   end

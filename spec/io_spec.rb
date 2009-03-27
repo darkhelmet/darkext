@@ -6,7 +6,7 @@ describe DarkIO do
       STDOUT.print('Hello, World!')
       STDERR.print('Hello, World!')
     end
-    out.is_a?(Array).should == true
+    out.should be_a_kind_of(Array)
     out.size.should == 2
   end
 
@@ -14,11 +14,11 @@ describe DarkIO do
     out = DarkIO::capture_output(:stderr => true, :stdout => false) do
       STDERR.print('Hello, World!')
     end
-    out.is_a?(String).should == true
+    out.should be_a_kind_of(String)
     out = DarkIO::capture_output(:stdout => true, :stderr => false) do
       STDOUT.print('Hello, World!')
     end
-    out.is_a?(String).should == true
+    out.should be_a_kind_of(String)
   end
 
   it 'should return nil if not capturing anything' do

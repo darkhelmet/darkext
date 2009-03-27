@@ -26,13 +26,13 @@ describe Array do
   end
 
   it 'should return a Numeric from sum and sum' do
-    @a.sum.is_a?(Numeric).should == true
-    @a.product.is_a?(Numeric).should == true
+    @a.sum.should be_a_kind_of(Numeric)
+    @a.product.should be_a_kind_of(Numeric)
   end
 
   it 'should return an array of equal size from squares' do
     squares = @a.squares
-    squares.is_a?(Array).should == true
+    squares.should be_a_kind_of(Array)
     squares.size.should == @a.size
   end
 
@@ -52,6 +52,6 @@ describe Array do
   end
 
   it 'should return an Array from randomize' do
-    @a.randomize.is_a?(Array).should == true
+    @a.randomize.should be_a_kind_of(Array)
   end
 end

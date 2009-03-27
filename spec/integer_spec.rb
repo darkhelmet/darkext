@@ -18,6 +18,6 @@ describe Integer do
   end
 
   it 'should return an Integer from factorial' do
-    10.fact.is_a?(Integer).should == true
+    10.fact.should be_a_kind_of(Integer)
   end
 end

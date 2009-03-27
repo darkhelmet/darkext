@@ -14,7 +14,7 @@ describe Beagle do
       # fail if we get here
       false.should == true
     rescue
-      $!.is_a?(Beagle::BeagleError).should == true
+      $!.should be_a_kind_of(Beagle::BeagleError)
     end
   end
 
@@ -33,7 +33,7 @@ describe Beagle do
   it 'should return a String for the status' do
     # TODO: use temp dir
     Beagle.home = '/balls'
-    Beagle.status.is_a?(String).should == true
+    Beagle.status.should be_a_kind_of(String)
   end
 
   it 'should return a true or false value from start' do

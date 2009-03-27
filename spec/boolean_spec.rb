@@ -17,7 +17,7 @@ describe TrueClass do
   end
 
   it 'should return a symbol from intern' do
-    true.intern.is_a?(Symbol).should == true
+    true.intern.should be_a_kind_of(Symbol)
   end
 end
 
@@ -27,6 +27,6 @@ describe FalseClass do
   end
 
   it 'should return a symbol from intern' do
-    false.intern.is_a?(Symbol).should == true
+    false.intern.should be_a_kind_of(Symbol)
   end
 end
