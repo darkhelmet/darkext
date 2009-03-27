@@ -11,8 +11,7 @@ module Net
     case resp
     when Net::HTTPSuccess     then resp
     when Net::HTTPRedirection then download(resp['location'], limit - 1)
-    else
-      resp.error!
+    else resp.error!
     end
   end
 
@@ -22,6 +21,7 @@ module Net
     else
       path = File.expand_path(path)
     end
+    raise ArgumentError.new('Save path is a directory') if File.directory?(path)
     resp = download(url)
     open(path,'w') { |file| file.write(resp.body) } if resp.is_a?(Net::HTTPSuccess)
   end
