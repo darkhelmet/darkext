@@ -8,20 +8,14 @@ describe Fiber do
   end
 
   it 'should respond to all the class methods' do
-    %w(yield current).each { |method| Fiber.respond_to?(method).should == true }
+    Fiber.should respond_to(*%w(yield current))
   end
 
   it 'should respond to all the instance methods' do
-    %w(resume yield).each { |method| @fiber.respond_to?(method).should == true }
+    @fiber.should respond_to(*%w(resume yield))
   end
 
   it 'should raise an error when it is done' do
-    begin
-      100.times { @fiber.resume }
-      # should break before this
-      true.should == false
-    rescue
-      $!.should be_a_kind_of(FiberError)
-    end
+    lambda { 100.times { @fiber.resume } }.should raise_error
   end
 end

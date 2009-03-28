@@ -2,19 +2,11 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe Integer do
   it 'should respond to the new methods' do
-    %w(fact).each do |method|
-      10.respond_to?(method).should == true
-    end
+    10.should respond_to(*%w(fact))
   end
 
   it 'should not calculate the factorial of negative numbers' do
-    begin
-      -10.fact
-      # fail if we get here
-      false.should == true
-    rescue
-      true.should == true
-    end
+    lambda { -10.fact }.should raise_error
   end
 
   it 'should return an Integer from factorial' do

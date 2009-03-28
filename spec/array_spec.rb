@@ -48,7 +48,7 @@ describe Array do
       r = @a.random
       counts[r - 1] += 1
     end
-    counts.each { |v| (v/count.to_f).around(1/counts.size.to_f).should == true }
+    counts.each { |v| (v/count.to_f).should be_close(1/counts.size.to_f,0.001) }
   end
 
   it 'should return an Array from randomize' do

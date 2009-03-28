@@ -2,18 +2,17 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe Object do
   it 'should respond to the new method' do
-    a = Object.new
-    a.respond_to?('is_boolean?').should == true
+    Object.new.should respond_to(*%w(is_boolean?))
   end
 
   it 'should return a boolean from is_boolean' do
-    true.is_boolean?.is_boolean?.should == true
+    true.is_boolean?.is_boolean?.should be_true
   end
 end
 
 describe TrueClass do
   it 'should respond to the new method' do
-    true.respond_to?('intern').should == true
+    true.should respond_to(*%w(intern))
   end
 
   it 'should return a symbol from intern' do
@@ -23,7 +22,7 @@ end
 
 describe FalseClass do
   it 'should respond to the new method' do
-    false.respond_to?('intern').should == true
+    false.should respond_to(*%w(intern))
   end
 
   it 'should return a symbol from intern' do
