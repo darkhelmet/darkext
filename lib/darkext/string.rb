@@ -27,11 +27,9 @@ class String
   # * :capture => true to capture the output. If :capture => true, background is voided
   def exec(opts = {})
     opts.with_defaults!(:background => false, :capture => false)
-    cmd = self
-    # TODO: Do this with threads maybe, so it's OS agnostic?
-    cmd += " &" if opts[:background] && !opts[:capture]
-    return system(cmd) if !opts[:capture]
-    return `#{cmd}` if opts[:capture]
+    return `#{self}` if opts[:capture]
+    return fork { system(self) } if opts[:background]
+    return system(self)
   end
 
   # Prints the String using print
