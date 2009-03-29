@@ -43,7 +43,7 @@ module Darkext
     def index(url, target = $stdout)
       @pages << url
 
-      root = open(url) { |f| Hpricot(f) }
+      root = Hpricot(open(url))
       (root/"a.#{@options.nested_find(:forum,:class)}").each do |link|
         index_forum(link.attributes['href'].to_s)
       end
@@ -77,7 +77,7 @@ module Darkext
 
     private
     def index_forum(href)
-      root = open(href) { |f| Hpricot(f) }
+      root = Hpricot(open(href))
       (root/"a.#{@options.nested_find(:forum,:class)}").each do |link|
         index_forum(link.attributes['href'].to_s)
       end
