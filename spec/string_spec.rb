@@ -24,6 +24,6 @@ describe String do
   end
 
   it 'should return nil if the range is not a valid format' do
-    'nipples'.to_range.should be_nil
+    lambda { 'nipples'.to_range }.should raise_error
   end
 end

@@ -14,12 +14,12 @@ class String
     when 3
       elements = self.split('...')
       if elements[0] == elements[0].to_i.to_s
-        return Range.new(elements[0].to_i, (elements[1] - 1).to_i)
+        return Range.new(elements[0].to_i, elements[1].to_i, true)
       else
-        return Range.new(elements[0], elements[1] - 1)
+        return Range.new(elements[0], elements[1], true)
       end
     end
-    return nil
+    raise ArgumentError.new('Could not parse range')
   end
 
   # Executes the string with system

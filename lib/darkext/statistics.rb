@@ -37,7 +37,7 @@ class Array
   end
 
   # Generates a histogram hash for the array
-  def histogram(bins = nil)
+  def histogram
     self.sort.inject({}) do |a,x|
       a[x] = a[x].to_i + 1
       a
@@ -53,33 +53,17 @@ class Array
   end
 
   # Variance
-  def population_variance
+  def variance
     raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.sum_of_squares.to_f / (self.size).to_f
   end
 
-  def sample_variance
-    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
-    self.sum_of_squares.to_f / (self.size - 1).to_f
-  end
-
   # Standard deviation
-  def population_deviation
+  def standard_deviation
     raise ArgumentError.new('Array size must be > 0') if self.size.zero?
-    self.population_variance.abs.sqrt
+    self.variance.abs.sqrt
   end
-
-  def sample_deviation
-    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
-    self.sample_variance.abs.sqrt
-  end
-
-  def geometric_deviation
-    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
-    gmean = self.g_mean
-    Math.exp((self.map { |x| (x.ln - gmean.ln).square }.sum.to_f / self.size.to_f).sqrt)
-  end
-  alias :gstddev :geometric_deviation
+  alias :stddev :standard_deviation
 
   # Randomly samples n elements
   def sample(n = 1)
@@ -117,7 +101,7 @@ class Array
   # Destructive standardize
   def standardize!
     m = self.mean.to_f
-    rho = self.sample_deviation.to_f
+    rho = self.standard_deviation.to_f
     self.map! { |v| (v.to_f - m) / rho }
   end
 
@@ -125,17 +109,6 @@ class Array
     raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     m = self.mean
     self.map { |v| v - m }.squares.sum
-  end
-
-  # Normalize the array
-  def normalize
-    self.clone.normalize!
-  end
-
-  # Normalize the array destructively
-  def normalize!
-    m = self.mean.to_f
-    self.map! { |v| v / m }
   end
 end
 
