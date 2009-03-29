@@ -7,27 +7,30 @@ require 'darkext/symbol'
 class Array
   # Finds the mean of the array
   def mean
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.sum / self.size.to_f
   end
   alias :average :mean
   alias :ave :mean
 
   def harmonic_mean
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.size.to_f / self.map { |i| 1 / i.to_f }.sum
   end
   alias :h_mean :harmonic_mean
 
   def geometric_mean
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.product.root(self.size)
   end
   alias :g_mean :geometric_mean
 
   # Finds the median of the array
   def median
-    return nil if self.size.zero?
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     case self.size % 2
     when 0
-      return self.sort[self.size / (2 - 1), 2].mean
+      return self.sort[(self.size / 2) - 1, 2].mean
     when 1
       return self.sort[self.size / 2]
     end
@@ -43,6 +46,7 @@ class Array
 
   # Finds the mode of the array
   def mode
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     map = self.histogram
     max = map.values.max
     map.keys.select { |x| map[x] == max }
@@ -50,23 +54,28 @@ class Array
 
   # Variance
   def population_variance
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.sum_of_squares.to_f / (self.size).to_f
   end
 
   def sample_variance
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.sum_of_squares.to_f / (self.size - 1).to_f
   end
 
   # Standard deviation
   def population_deviation
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.population_variance.abs.sqrt
   end
 
   def sample_deviation
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     self.sample_variance.abs.sqrt
   end
 
   def geometric_deviation
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     gmean = self.g_mean
     Math.exp((self.map { |x| (x.ln - gmean.ln).square }.sum.to_f / self.size.to_f).sqrt)
   end
@@ -79,7 +88,10 @@ class Array
 
   # Generates a confidence interval
   def ci(opts = { })
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     opts.with_defaults!({ :percent => 0.95, :rho => 1, :type => :center })
+    percent = opts[:percent]
+    rho = opts[:rho]
     m = self.mean
     ret = Array.new
     div = (opts[:type] == :center ? 2 : 1)
@@ -110,6 +122,7 @@ class Array
   end
 
   def sum_of_squares
+    raise ArgumentError.new('Array size must be > 0') if self.size.zero?
     m = self.mean
     self.map { |v| v - m }.squares.sum
   end
@@ -173,9 +186,10 @@ module Darkext
       # * R (:r)
       # * unbiased estimator (:estimator)
       # * the equation as a lambda (:equation)
-      # Raises an argument error if the arguments are not the same size
+      # Raises an argument error if the arguments are not the same size or either is zero
       def self.least_squares(xs,ys)
-        raise ArgumentError("Arguments must be of equal size") if xs.size != ys.size
+        raise ArgumentError.new('Arrays must have size > 0') if xs.size.zero? || ys.size.zero?
+        raise ArgumentError.new('Arrays must be of equal size') if xs.size != ys.size
         n = xs.size
         b_1 = (xs.zip(ys).map(&:product).sum - ((ys.sum * xs.sum)/n))/(xs.map(&:square).sum - (xs.sum.square/n))
         b_0 = ys.mean - b_1 * xs.mean
@@ -187,7 +201,8 @@ module Darkext
         estimator = ss_e/(n - 2)
         r_2 = 1 - (ss_e/ss_t)
         r = r_2.sqrt
-        reg = {:n => n,
+        reg = {
+          :n => n,
           :b_1 => b_1,
           :b_0 => b_0,
           :predicted => predicted,
@@ -197,7 +212,8 @@ module Darkext
           :estimator => estimator,
           :equation => equation,
           :r_2 => r_2,
-          :r => r}
+          :r => r
+        }
         return reg
       end
     end
