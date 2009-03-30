@@ -54,4 +54,10 @@ describe Array do
   it 'should return an Array from randomize' do
     @a.randomize.should be_a_kind_of(Array)
   end
+
+  it 'should return nil from sum, product and random if size == 0' do
+    %w(sum product random).each do |method|
+      Array.new.send(method.intern).should be_nil
+    end
+  end
 end

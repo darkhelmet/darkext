@@ -25,17 +25,4 @@ class Hash
     merger = proc { |key,v1,v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
     self.merge!(second, &merger)
   end
-
-  def nested_hash(array)
-    node = self
-    array.each do |i|
-      node[i]=Hash.new if node[i].nil?
-      node = node[i]
-    end
-    self
-  end
-
-  def merge_nested_hash!(nested_hash)
-    deep_merge!(nested_hash)
-  end
 end

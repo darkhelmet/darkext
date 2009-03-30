@@ -18,4 +18,8 @@ describe Fiber do
   it 'should raise an error when it is done' do
     lambda { 100.times { @fiber.resume } }.should raise_error
   end
+
+  it 'should return a string from inspect' do
+    @fiber.inspect.should be_a_kind_of(String)
+  end
 end

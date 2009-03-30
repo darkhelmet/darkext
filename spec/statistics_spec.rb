@@ -7,7 +7,7 @@ describe Array do
 
   it 'should respond to all the new methods' do
     Array.new.should respond_to(*%w(mean average ave harmonic_mean h_mean geometric_mean g_mean median histogram mode standard_deviation stddev standard_deviation sample ci standardize standardize! sum_of_squares))
-    Darkext::Statistics.should respond_to(*%w(prob zscore p_val))
+    Darkext::Statistics.should respond_to(*%w(prob zscore))
     Darkext::Statistics::Regression.should respond_to(*%w(least_squares))
   end
 
@@ -36,10 +36,6 @@ describe Array do
   it 'should return a Numeric from prob and zscore' do
     Darkext::Statistics::prob(1).should be_a_kind_of(Numeric)
     Darkext::Statistics::zscore(0.9).should be_a_kind_of(Numeric)
-  end
-
-  it 'should return a Numeric from p_val' do
-    Darkext::Statistics::p_val(@a).should be_a_kind_of(Numeric)
   end
 
   it 'should return a Hash from least_squares' do

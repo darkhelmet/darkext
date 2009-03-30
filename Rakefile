@@ -34,7 +34,6 @@ end
 begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |t|
-    t.libs << 'test'
     t.test_files = FileList['test/**/*_test.rb']
     t.verbose = true
   end
@@ -47,6 +46,7 @@ begin
   Spec::Rake::SpecTask.new do |t|
     t.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
     t.spec_files = FileList['spec/**/*_spec.rb']
+    t.rcov = true
   end
 rescue LoadError
   puts "rspec is not available. In order to run rspec, you must: sudo gem install rspec"

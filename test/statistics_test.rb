@@ -56,6 +56,8 @@ class StatisticsTest < Test::Unit::TestCase
     ci = @a.ci
     assert_in_delta(ci.shift, 5.15, 0.01)
     assert_in_delta(ci.shift, 6.24, 0.01)
+    assert_in_delta(@a.ci(:type => :upper).shift, 6.15, 0.01)
+    assert_in_delta(@a.ci(:type => :lower).shift, 5.24, 0.01)
   end
 
   def test_standardize
@@ -77,5 +79,31 @@ class StatisticsTest < Test::Unit::TestCase
     assert_in_delta(Darkext::Statistics::zscore(0.5), 0, 0.1)
     assert_in_delta(Darkext::Statistics::prob(0.75), 0.77, 0.02)
     assert_in_delta(Darkext::Statistics::zscore(Darkext::Statistics::prob(2.5)), 2.5, 0.0001)
+  end
+
+  def test_regession
+    xs = [0,1.2,2,2.9,4,5,6]
+    ys = [0.1,1,2.1,3,4.3,4.9,6]
+    results = Darkext::Statistics::Regression::least_squares(xs,ys)
+    assert_equal(results[:n],xs.size)
+    assert_in_delta(results[:b_1], 1, 0.1)
+    assert_in_delta(results[:b_0], 0, 0.1)
+    assert_equal(results[:predicted].size, xs.size)
+    results[:predicted].each_with_index do |pred,index|
+      assert_in_delta(pred, index, 0.3)
+    end
+    assert_equal(results[:residuals].size, xs.size)
+    results[:residuals].each_with_index do |pred,index|
+      assert_in_delta(pred, 0, 0.3)
+    end
+    assert_in_delta(results[:ss_e], 0.15, 0.01)
+    assert_in_delta(results[:ss_t], 27.49, 0.01)
+    assert_in_delta(results[:estimator], 0.03, 0.01)
+    assert_in_delta(results[:r_2], 1, 0.01)
+    assert_in_delta(results[:r], 1, 0.01)
+    eqn = results[:equation]
+    (0..100).each do |i|
+      assert_in_delta(eqn.call(i), i, 0.25)
+    end
   end
 end

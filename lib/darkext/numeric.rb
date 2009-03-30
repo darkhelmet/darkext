@@ -18,7 +18,8 @@ class Numeric
 
   # Do some other roots
   def root(n = 2)
-    return self.sqrt if n == 2
+    return self if 1 == n
+    return self.sqrt if 2 == n
     self ** (1 / n.to_f)
   end
 

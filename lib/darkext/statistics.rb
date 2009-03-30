@@ -136,6 +136,8 @@ module Darkext
     end
 
     # Finds a two tail p-val for a high/low array
+    # can't remember how to use this
+=begin
     def self.p_val(r, n = 30, rho = 1, mu = r.mean)
       probs = r.map do |x|
         (x - mu) / (rho / n.sqrt)
@@ -144,6 +146,7 @@ module Darkext
       end
       return 1 - (probs[1] - probs[0])
     end
+=end
 
     module Darkext::Statistics::Regression
       # Do a least squares linear regression on the two sets of x's and y's
