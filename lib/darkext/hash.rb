@@ -25,4 +25,14 @@ class Hash
     merger = proc { |key,v1,v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
     self.merge!(second, &merger)
   end
+
+  def method_missing(m,*a)
+    if m.to_s =~ /=$/
+      self[$`] = a[0]
+    elsif a.empty?
+      self[m]
+    else
+      raise NoMethodError, "#{ m}"
+    end
+  end
 end
