@@ -34,9 +34,7 @@ module Sinatra
       end
 
       def host
-        port = request.env['SERVER_PORT'].to_i
-        port = port == 80 ? "" : ":#{port}"
-        "#{protocol}://#{server_name}#{port}"
+        "#{protocol}://#{request.env['HTTP_HOST']}"
       end
 
       def protocol
