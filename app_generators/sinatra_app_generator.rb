@@ -25,14 +25,19 @@ class SinatraAppGenerator < RubiGen::Base
     record do |m|
       # Root directory and all subdirectories.
       m.directory('')
-      %w(lib public views).each { |path| m.directory(path) }
+      %w(lib public views tmp).each { |path| m.directory(path) }
       %w(get put post delete).each do |path|
-        m.template('http_method.rb', "lib/#{path}.rb", :assigns => { :method => path })
+        m.template('http_method.rb',
+                   "lib/#{path}.rb",
+                   :assigns => { :method => path })
       end
       m.template('helpers.rb', 'lib/helpers.rb')
       m.template('options.rb', 'lib/options.rb')
       m.template('error.rb', 'lib/error.rb')
       m.template('app.rb', "#{app_name}.rb", script_options)
+      m.template('gitignore', '.gitignore')
+      m.template('gitignore', 'tmp/.gitignore')
+      m.template('config.ru', 'config.ru')
       #m.dependency "install_rubigen_scripts", [destination_root, "rubygems"], :shebang => options[:shebang]
     end
   end

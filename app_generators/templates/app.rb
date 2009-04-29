@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-%w(rubygems sinatra/base darkext darkext/sinatra).each { |lib| require lib }
+%w(rubygems haml sinatra/base darkext darkext/sinatra).each { |lib| require lib }
 Dir['lib/*.rb'].each { |file| load file }
 
 load 'local_options.rb' if File.exists?('local_options.rb')
