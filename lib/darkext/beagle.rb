@@ -1,9 +1,8 @@
-require 'colored'
 require 'darkext/fiber'
 require 'darkext/string'
 require 'darkext/symbol'
 
-"Beagle.query is not secure! Use with caution".red.printn
+"Beagle.query is not secure! Use with caution".printn
 
 module Beagle
   class BeagleError < RuntimeError; end
