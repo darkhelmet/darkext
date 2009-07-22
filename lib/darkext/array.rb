@@ -16,12 +16,12 @@ class Array
 
   # Sums the array
   def sum
-    self.inject(:+)
+    self.inject(&:+)
   end
 
   # Finds the product of the array
   def product
-    self.inject(:*)
+    self.inject(&:*)
   end
 
   # Collects the squares of each value in the array
