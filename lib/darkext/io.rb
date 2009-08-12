@@ -3,7 +3,7 @@ require 'darkext/hash'
 module DarkIO
   # Runs a block and captures the output it generates
   def self.capture_output(opts = { }) # yield e
-    opts.with_defaults!(:stdout => true, :stderr => false)
+    opts = { :stdout => true, :stderr => false }.merge(opts)
     cout,cerr = opts[:stdout],opts[:stderr]
 
     yield and return if !cout && !cerr

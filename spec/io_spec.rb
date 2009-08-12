@@ -25,6 +25,20 @@ describe DarkIO do
     DarkIO::capture_output(:stderr => false, :stdout => false) do
       STDOUT.print('Hello, World!')
       STDERR.print('Hello, World!')
-    end.nil?.should == true
+    end.nil?.should be_true
+  end
+
+  it 'should capture output' do
+    HW = 'Hello, World!'
+    out = DarkIO::capture_output { HW.print }
+    out.should == HW
+    out = DarkIO::capture_output(:stderr => true) do
+      (HW + 'STDOUT').print
+      STDERR.print(HW + 'STDERR')
+    end
+    out.shift.should == HW + 'STDOUT'
+    out.shift.should == HW + 'STDERR'
+    out = DarkIO::capture_output(:stderr => true, :stdout => false) { STDERR.print(HW) }
+    out.should == HW
   end
 end

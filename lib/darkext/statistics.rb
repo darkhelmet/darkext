@@ -73,7 +73,7 @@ class Array
   # Generates a confidence interval
   def ci(opts = { })
     raise ArgumentError.new('Array size must be > 0') if self.size.zero?
-    opts.with_defaults!({ :percent => 0.95, :rho => 1, :type => :center })
+    opts = { :percent => 0.95, :rho => 1, :type => :center }.merge(opts)
     percent = opts[:percent]
     rho = opts[:rho]
     m = self.mean

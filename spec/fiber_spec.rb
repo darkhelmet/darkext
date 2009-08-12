@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 describe Fiber do
   before(:each) do
     @fiber = Fiber.new do
-      (1..10).each { |i| Fiber.yield }
+      (1..10).each { |i| Fiber.yield(i) }
     end
   end
 
@@ -21,5 +21,15 @@ describe Fiber do
 
   it 'should return a string from inspect' do
     @fiber.inspect.should be_a_kind_of(String)
+  end
+
+  it 'should inspect properly' do
+    @fiber.inspect.should match(/.*Fiber:0x/)
+  end
+
+  it 'should, um, work' do
+    a = Array.new
+    10.times { a << @fiber.resume }
+    a.should == (1..10).to_a
   end
 end
